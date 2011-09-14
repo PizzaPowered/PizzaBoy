@@ -1,0 +1,7 @@
+---
+:api_key: TOKEN
+:subdomain: SUBDOMAIN
+:rooms:
+  - NAME
+  - OR
+  - ID
