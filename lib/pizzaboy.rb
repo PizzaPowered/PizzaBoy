@@ -10,12 +10,25 @@ module PizzaBoy
     Pathname.new(File.expand_path("../", File.dirname(__FILE__)))
   end
 
+  def lib
+    root + "lib"
+  end
+
   def config
     @config ||= YAML.load_file(root + "config/pizzaboy.yml")
   end
 
   def scamp
-    @scamp ||= Scamp.new(:api_key => config[:api_key], :subdomain => config[:subdomain])
+    @scamp ||= Scamp.new(default_args)
+  end
+
+  def default_args
+    {
+      :api_key => config[:api_key],
+      :subdomain => config[:subdomain],
+      :verbose => true,
+      :first_match_only => true
+    }
   end
 
   def guts &block
@@ -26,9 +39,4 @@ module PizzaBoy
   extend self
 end
 
-# PizzaBoy.scamp.print_channels
-# 364968: "Casual"
-# 360387: "Main"
-# 364627: "Support Room"
-
-require "pizzaboy/guts"
+require PizzaBoy.lib + "pizzaboy/guts"
