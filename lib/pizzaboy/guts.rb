@@ -15,4 +15,8 @@ PizzaBoy.guts do
     say matches[0]
   end
 
+  match /(.*)/ do
+    puts "catchall triggered for #{matches[0]}"
+  end
+
 end
